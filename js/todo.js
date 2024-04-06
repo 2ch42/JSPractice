@@ -38,7 +38,7 @@ function handleToDoSubmit(event) {
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
-const savedToDos = localStorage.getitem(TODOS_KEY);
+const savedToDos = localStorage.getItem(TODOS_KEY);
 
 console.log(savedToDos);
 
