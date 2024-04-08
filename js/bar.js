@@ -3,13 +3,15 @@ const ctx = bar.getContext("2d");
 
 const BARTOP = 0;
 const BARBOTTOM = bar.height;
+const BARLEFT = 0;
+const BARRIGHT = bar.width;
 
 const STICKWIDTH = 10;
 const STICKHEIGHT = 50;
 
-let x1 = 100;
+let x1 = BARLEFT;
 let y1 = bar.height / 2;
-let x2 = 900;
+let x2 = BARRIGHT - STICKWIDTH;
 let y2 = bar.height / 2;
 
 const keys = {
@@ -57,28 +59,28 @@ document.addEventListener("keyup", function(event) {
 function moveObjects() {
     // ArrowUp 또는 w 키가 눌려있을 때
     if (keys.w) {
-        y1 -= 10;
+        y1 -= 5;
         if (y1 <= BARTOP) {
             y1 = BARTOP;
         }
     }
     // ArrowDown 또는 s 키가 눌려있을 때
     if (keys.s) {
-        y1 += 10;
+        y1 += 5;
         if (y1 >= (BARBOTTOM - STICKHEIGHT)) {
             y1 = BARBOTTOM - STICKHEIGHT;
         }
     }
     // ArrowUp 또는 w 키가 눌려있을 때
     if (keys.ArrowUp) {
-        y2 -= 10;
+        y2 -= 5;
         if (y2 <= BARTOP) {
             y2 = BARTOP;
         }
     }
     // ArrowDown 또는 s 키가 눌려있을 때
     if (keys.ArrowDown) {
-        y2 += 10;
+        y2 += 5;
         if (y2 >= (BARBOTTOM - STICKHEIGHT)) {
             y2 = BARBOTTOM - STICKHEIGHT;
         }
@@ -86,5 +88,8 @@ function moveObjects() {
 
     drawBar();
 }
+
+setInterval(drawBar, 10);
+setInterval(moveObjects, 10);
 
 drawBar();

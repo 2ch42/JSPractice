@@ -1,4 +1,10 @@
 body {
       background-color: beige;
       text-align: center;
-};
+}
+
+#bar {
+      border-width: 10px;
+      border-color: red;
+      border-style: solid;
+}
