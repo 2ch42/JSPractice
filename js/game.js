@@ -23,11 +23,8 @@ let y2 = game.height / 2 - STICKHEIGHT / 2;
 let ballX = GAMERIGHT / 2;
 let ballY = GAMEBOTTOM / 2;
 
-// let speedX = Math.random;
-// let speedY = Math.random;
-
-let speedX = 1.5;
-let speedY = 1.5;
+speedX = parseFloat(Math.random() + 1);
+speedY = parseFloat(Math.random() + 1);
 
 const keys = {
     ArrowUp: false,
@@ -58,23 +55,40 @@ function drawBall()
 function moveBall() {
     ballX += speedX;
     ballY += speedY;
-    if (ballX <= x1 + BALLRADIUS + STICKWIDTH) // left wall or stick
+    if (ballX == x1 + BALLRADIUS + STICKWIDTH) // left wall or stick
     {
         /*
         left wall: x1 + BALLRADIUS
 
         left stick: x1 + BALLRADIUS + STICKWIDTH
         */
-        speedX *= -1;
+        if (ballY >= y1 - BALLRADIUS && ballY <= y1 + STICKHEIGHT + BALLRADIUS) {
+            speedX *= -1;
+        }
     }
-    else if (ballX >= x2 - BALLRADIUS) // right wall or stick 
+    else if (ballX < x1 + BALLRADIUS + STICKWIDTH) // left wall or stick
+    {
+        ballX = GAMERIGHT / 2;
+        ballY = GAMEBOTTOM / 2;
+        speedX = parseFloat(Math.random() + 1) * -1;
+        speedY = parseFloat(Math.random() + 1) * -1;
+    }
+    else if (ballX == x2 - BALLRADIUS) // right wall or stick 
     {
         /* 
         right wall: x2
 
         right stick: x2 - BALLRADIUS
         */
+       if (ballY >= y2 - BALLRADIUS && ballY <= y2 + STICKHEIGHT + BALLRADIUS)
         speedX *= -1;
+    }
+    else if (ballX > x2 - BALLRADIUS) // right wall or stick 
+    {
+        ballX = GAMERIGHT / 2;
+        ballY = GAMEBOTTOM / 2;
+        speedX = parseFloat(Math.random() + 1);
+        speedY = parseFloat(Math.random() + 1);
     }
     else if (ballY <= 0 + BALLRADIUS) // top wall
     {
