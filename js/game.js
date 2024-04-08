@@ -24,6 +24,7 @@ const keys = {
 function drawGame() {
         ctx.clearRect(0, 0, game.width, game.height);
         ctx.fillStyle = "black";
+        ctx.fillRect(GAMERIGHT / 2, 0, 5, GAMEBOTTOM);
         ctx.fillRect(x1, y1, STICKWIDTH, STICKHEIGHT);
         ctx.fillRect(x2, y2, STICKWIDTH, STICKHEIGHT);
 }
