@@ -23,8 +23,8 @@ let y2 = game.height / 2 - STICKHEIGHT / 2;
 let ballX = GAMERIGHT / 2;
 let ballY = GAMEBOTTOM / 2;
 
-speedX = parseFloat(Math.random() + 1);
-speedY = parseFloat(Math.random() + 1);
+speedX = parseFloat(Math.random() + 2);
+speedY = parseFloat(Math.random() + 2);
 
 const keys = {
     ArrowUp: false,
@@ -55,42 +55,30 @@ function drawBall()
 function moveBall() {
     ballX += speedX;
     ballY += speedY;
-    if (ballX == x1 + BALLRADIUS + STICKWIDTH) // left wall or stick
+    if (ballX < (x1 + BALLRADIUS + STICKWIDTH)) // left wall or stick
     {
-        /*
-        left wall: x1 + BALLRADIUS
-
-        left stick: x1 + BALLRADIUS + STICKWIDTH
-        */
-        if (ballY >= y1 - BALLRADIUS && ballY <= y1 + STICKHEIGHT + BALLRADIUS) {
+        if ((ballY > (y1 - BALLRADIUS)) && (ballY < (y1 + STICKHEIGHT + BALLRADIUS))) {
             speedX *= -1;
+            return ;
         }
-    }
-    else if (ballX < x1 + BALLRADIUS + STICKWIDTH) // left wall or stick
-    {
         ballX = GAMERIGHT / 2;
         ballY = GAMEBOTTOM / 2;
-        speedX = parseFloat(Math.random() + 1) * -1;
-        speedY = parseFloat(Math.random() + 1) * -1;
+        speedX = parseFloat(Math.random() + 2) * -1;
+        speedY = parseFloat(Math.random() + 2) * -1;
     }
-    else if (ballX == x2 - BALLRADIUS) // right wall or stick 
+    else if (ballX > (x2 - BALLRADIUS)) // right wall or stick 
     {
-        /* 
-        right wall: x2
-
-        right stick: x2 - BALLRADIUS
-        */
-       if (ballY >= y2 - BALLRADIUS && ballY <= y2 + STICKHEIGHT + BALLRADIUS)
-        speedX *= -1;
-    }
-    else if (ballX > x2 - BALLRADIUS) // right wall or stick 
-    {
+        if ((ballY >= (y2 - BALLRADIUS)) && (ballY <= (y2 + STICKHEIGHT + BALLRADIUS)))
+        {
+             speedX *= -1;
+             return ;
+        }
         ballX = GAMERIGHT / 2;
         ballY = GAMEBOTTOM / 2;
-        speedX = parseFloat(Math.random() + 1);
-        speedY = parseFloat(Math.random() + 1);
+        speedX = parseFloat(Math.random() + 2);
+        speedY = parseFloat(Math.random() + 2);
     }
-    else if (ballY <= 0 + BALLRADIUS) // top wall
+    else if (ballY <= BALLRADIUS) // top wall
     {
         speedY *= -1;
     }
