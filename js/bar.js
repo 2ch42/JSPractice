@@ -1,10 +1,6 @@
 const bar = document.querySelector("#bar");
 const ctx = bar.getContext("2d");
 
-// const rect = bar.getBoundingClientRect();
-// const rectTop = rect.top;
-// const rectBot = rect.bottom;
-
 const BARTOP = 0;
 const BARBOTTOM = bar.height;
 
@@ -16,10 +12,12 @@ let y1 = bar.height / 2;
 let x2 = 900;
 let y2 = bar.height / 2;
 
-// function resizeCanvas() {
-//     bar.height = 1000;
-//     bar.scrollHeight = 1000;
-// }
+const keys = {
+    ArrowUp: false,
+    ArrowDown: false,
+    w: false,
+    s: false
+};
 
 function drawBar() {
         ctx.clearRect(0, 0, bar.width, bar.height);
@@ -29,45 +27,64 @@ function drawBar() {
 }
 
 document.addEventListener("keydown", function(event) {
+    // 해당 키의 상태를 true로 설정
+    keys[event.key] = true;
+
+    // 모든 키의 상태를 확인하여 물체의 움직임 조절
+    moveObjects();
+});
+
+document.addEventListener("keyup", function(event) {
+    // 해당 키의 상태를 false로 설정
+    // keys[event.key] = false;
+    if (event.key === "w") {
+        keys[event.key] = false;
+    }
+    if (event.key === "s") {
+        keys[event.key] = false;
+    }
     if (event.key === "ArrowUp") {
+        keys[event.key] = false;
+    }
+    if (event.key === "ArrowDown") {
+        keys[event.key] = false;
+    }
+
+    // 모든 키의 상태를 확인하여 물체의 움직임 조절
+    moveObjects();
+});
+
+function moveObjects() {
+    // ArrowUp 또는 w 키가 눌려있을 때
+    if (keys.w) {
         y1 -= 10;
-        if (y1 <= BARTOP)
-        {
+        if (y1 <= BARTOP) {
             y1 = BARTOP;
         }
-        drawBar();
     }
-    else if (event.key === "ArrowDown") {
+    // ArrowDown 또는 s 키가 눌려있을 때
+    if (keys.s) {
         y1 += 10;
-        if (y1 >= (BARBOTTOM - STICKHEIGHT))
-        {
+        if (y1 >= (BARBOTTOM - STICKHEIGHT)) {
             y1 = BARBOTTOM - STICKHEIGHT;
         }
-        drawBar();
     }
-    else if (event.key === "w") {
+    // ArrowUp 또는 w 키가 눌려있을 때
+    if (keys.ArrowUp) {
         y2 -= 10;
-        if (y2 <= BARTOP)
-        {
+        if (y2 <= BARTOP) {
             y2 = BARTOP;
         }
-        drawBar();
     }
-    else if (event.key === "s") {
+    // ArrowDown 또는 s 키가 눌려있을 때
+    if (keys.ArrowDown) {
         y2 += 10;
-        if (y2 >= (BARBOTTOM - STICKHEIGHT))
-        {
+        if (y2 >= (BARBOTTOM - STICKHEIGHT)) {
             y2 = BARBOTTOM - STICKHEIGHT;
         }
-        drawBar();
     }
-});
 
-window.addEventListener("resize", function () {
-    // resizeCanvas();
     drawBar();
-});
-
-// resizeCanvas();
+}
 
 drawBar();
