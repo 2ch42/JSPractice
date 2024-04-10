@@ -61,6 +61,7 @@ function moveBall() {
             speedX *= -1;
             return ;
         }
+        scoreRight++;
         ballX = GAMERIGHT / 2;
         ballY = GAMEBOTTOM / 2;
         speedX = parseFloat(Math.random() + 2) * -1;
@@ -73,6 +74,7 @@ function moveBall() {
              speedX *= -1;
              return ;
         }
+        scoreLeft++;
         ballX = GAMERIGHT / 2;
         ballY = GAMEBOTTOM / 2;
         speedX = parseFloat(Math.random() + 2);
@@ -117,8 +119,8 @@ function moveSticks() {
     if (keys.w) {
         y1 -= 5;
         if (y1 <= GAMETOP) {
-            y1 = GAMETOP;GAMEBOTTOM
-        }GAMEBOTTOM
+            y1 = GAMETOP;
+        }
     }
     if (keys.s) {
         y1 += 5;
